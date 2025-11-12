@@ -1,0 +1,45 @@
+- name: app setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yaml
+  tags:
+  - deployment
+
+
+- name: nodejs installation 
+  #ansible.builtin.import_role:
+  ansible.builtin.include_role: # include will include the task but will not respect the tags we have to go to common role and there also we should use tags to respective tags that we want
+    name: common
+    tasks_from: nodejs.yaml
+  tags:                # include import tags -t deployment
+  - deployment
+
+- name: copy mongo.repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: install mongodb client
+  ansible.builtin.package:
+    name: mongodb-mongosh
+    state: present
+
+- name: connect to mongodb from catalogue
+  ansible.builtin.command: mongosh {{ MONGODB_HOST }} --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
+  register: catalogue_output
+
+# - name: print catalogue_output
+#   ansible.builtin.debug:
+#     msg: "{{ catalogue_output }}"
+
+- name: load products into mongodb
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
+  when: catalogue_output.stdout | int < 0 # when catalogue collection is not available in mongodb database then it will return a negative value or else it will return positive value
+
+
+- name: app setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: system-setup.yaml
+  tags:
+  - deployment

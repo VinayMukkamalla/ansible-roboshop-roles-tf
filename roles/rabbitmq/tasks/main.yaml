@@ -1,0 +1,35 @@
+- name: copy rabbitmq repo
+  ansible.builtin.copy:
+    src: rabbitmq.repo
+    dest: /etc/yum.repos.d/rabbitmq.repo
+
+
+- name: install rabbitmq-server
+  ansible.builtin.package:
+    name: rabbitmq-server
+    state: present
+
+
+- name: start and enable rabbitmq service
+  ansible.builtin.service:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+# - name: add roboshop user    ## you can also use below comunity module for rabbitmq user management
+#   ansible.builtin.command: rabbitmqctl add_user roboshop roboshop123
+
+# - name: set permissions for roboshop user
+#   ansible.builtin.command: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+
+
+- name: create and manage permissions to user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    permissions:
+      - vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+    state: present

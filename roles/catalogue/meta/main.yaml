@@ -1,0 +1,3 @@
+# catalogue will work only if there is common role as it is dependent on common so this meta folder dependencies will act like a checker it will check if common role is available or not and also acts as metadata
+dependencies:
+  - role: common

@@ -1,0 +1,25 @@
+plugin: amazon.aws.aws_ec2  # dynamic inventory plugin  to connect with aws and fetch ip address of ec2 instances 
+regions:
+- us-east-1
+filters:
+  tag:Name: frontend
+  instance-state-name: running
+  #you can add more parameters
+# filters:
+#   tag:Name: catalogue
+#   instance-state-name: running
+hostnames:
+  - private-ip-address
+compose:
+  ansible_host: private_ip_address
+keyed_groups:
+  - key: tags.Name    # frontend
+    prefix: "dynamic" # dynamic_frontend  we should give this name group name in play book frontend playbook hosts: dynamic_frontend
+    separator: "_"    # _
+
+
+
+
+
+# commands to check inventory ( dynamically created ip address -- instances)
+# ansible-inventory -i frontend.aws_ec2.yaml  -- graph 
