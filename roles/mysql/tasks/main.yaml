@@ -15,8 +15,8 @@
     #state: present
     executable: pip3.9
   loop:
-  - PyMySQL 
-  - cryptography 
+  - botocore
+  - boto3
 
 - name: creating root password for default mysql user # not following security as of now
   ansible.builtin.command: mysql_secure_installation --set-root-pass {{ MYSQL_ROOT_PASSWORD }}
