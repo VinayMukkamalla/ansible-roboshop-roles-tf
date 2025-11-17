@@ -1,1 +1,1 @@
-MONGODB_HOST: mongodb.vinaymukkamalla.fun
+MONGODB_HOST: mongodb-{{ env }}.vinaymukkamalla.fun
