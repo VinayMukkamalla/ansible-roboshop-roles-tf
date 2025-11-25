@@ -1,10 +1,10 @@
 MONGODB_HOST: mongodb-{{  env  }}.vinaymukkamalla.fun
 REDIS_HOST: redis-{{  env  }}.vinaymukkamalla.fun
-CATALOGUE_HOST: catalogue-{{  env  }}.vinaymukkamalla.fun
-CART_HOST: cart-{{  env  }}.vinaymukkamalla.fun
+CATALOGUE_HOST: catalogue.backend-alb-{{  env  }}.vinaymukkamalla.fun
+CART_HOST: cart.backend-alb-{{  env  }}.vinaymukkamalla.fun
 MYSQL_HOST: mysql-{{  env  }}.vinaymukkamalla.fun
 RABBITMQ_HOST: rabbitmq-{{  env  }}.vinaymukkamalla.fun
-USER_HOST: user-{{  env  }}.vinaymukkamalla.fun
-SHIPPING_HOST: shipping-{{  env  }}.vinaymukkamalla.fun
-PAYMENT_HOST: payment-{{  env  }}.vinaymukkamalla.fun
+USER_HOST: user.backend-alb-{{  env  }}.vinaymukkamalla.fun
+SHIPPING_HOST: shipping.backend-alb-{{  env  }}.vinaymukkamalla.fun
+PAYMENT_HOST: payment.backend-alb-{{  env  }}.vinaymukkamalla.fun
 
