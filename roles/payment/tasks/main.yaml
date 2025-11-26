@@ -3,16 +3,6 @@
     name: common
     tasks_from: app-setup.yaml
 
-- name: upgrade openssl packages
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: latest
-  loop:
-  - openssl-devel
-  - openssl  
-  - cryptography  
-  - paramiko 
-  - ansible
   
 - name: python setup
   ansible.builtin.import_role:
