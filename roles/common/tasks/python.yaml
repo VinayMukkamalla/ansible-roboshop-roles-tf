@@ -4,7 +4,9 @@
     state: present
   loop:
   - python3
+  - openssl
   - gcc
+  - openssl-devel
   - python3-devel
 
 - name: installing dependencies
