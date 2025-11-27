@@ -4,7 +4,6 @@
     state: present
   loop:
   - python3
-  - gcc
   - python3-devel
 
 - name: install dependencies
