@@ -30,10 +30,10 @@
       - ansible
     state: latest
 
-# - name: app setup
-#   ansible.builtin.import_role:
-#     name: common
-#     tasks_from: python.yaml
+- name: app setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: python.yaml
 
 - name: system setup
   ansible.builtin.import_role:
